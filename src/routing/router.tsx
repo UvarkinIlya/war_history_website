@@ -3,6 +3,7 @@ import Landing from "../pages/Landing";
 import Contents from "../pages/Contents";
 import Glossary from "../pages/Glossary";
 import Tests from "../pages/Tests";
+import Videos from "../pages/Videos";
 
 
 export const router = createBrowserRouter([
@@ -21,5 +22,9 @@ export const router = createBrowserRouter([
   {
     path: "/tests",
     element: <Tests/>
+  },
+  {
+    path: "/videos",
+    element: <Videos/>
   }
 ]);
