@@ -12,7 +12,7 @@ export function getChapters(page:number, size:number):Array<ChapterBackend> {
         return savedChapters
     } else{
         const request = new XMLHttpRequest()
-        request.open('GET', `http://localhost:8080/api/v1/schemas/search?page=${page}&size=${size}`, false)
+        request.open('GET', `http://localhost:8080/api/schemas/search?page=${page}&size=${size}`, false)
         request.send()
 
         if (request.status !== 200) {
