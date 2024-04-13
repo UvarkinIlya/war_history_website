@@ -4,6 +4,7 @@ import Contents from "../pages/Contents";
 import Glossary from "../pages/Glossary";
 import Tests from "../pages/Tests";
 import Videos from "../pages/Videos";
+import {GlossaryPage} from "../pages/Glossary/GlossaryPage/glossaryPage";
 
 
 export const router = createBrowserRouter([
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
   {
     path: "/glossary",
     element: <Glossary/>
+  },
+  {
+    path: "/glossary/:pageId",
+    element: <GlossaryPage/>
   },
   {
     path: "/tests",

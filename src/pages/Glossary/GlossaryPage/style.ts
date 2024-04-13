@@ -2,7 +2,7 @@ export function Background() {
     return({
         backgroundColor: '#00150B',
         fontFamily: 'Fortuna',
-        minHeight: '100vh',
+        heightMin: '100vh',
         width: '100wv'
     })
 }
