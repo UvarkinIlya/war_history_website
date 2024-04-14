@@ -1,15 +1,10 @@
 import React, { useState } from "react"
 import { NavigationComponent } from "../../components/NavigationComponent"
 import { Background } from "./style"
-import glos from "./testGlossary.json"
 import { GlossarySearchGenerator } from "../../components/SearchGenerator/glossarySearchGenerator"
 import {getGlossary} from "../../backend/glossary";
-import { TablePagination, useTheme} from "@mui/material";
-import * as locales from '@mui/material/locale';
-import { createTheme, ThemeProvider} from '@mui/material/styles';
 import {handleInputChange} from "../../components/SearchGenerator/common";
-
-type SupportedLocales = keyof typeof locales;
+import {Pagination} from "../../components/Pagination/pagination";
 
 const Glossary = () => {
     const [page, setPage] = React.useState(0);
@@ -28,15 +23,6 @@ const Glossary = () => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
-
-    const [locale, setLocale] = React.useState<SupportedLocales>('ruRU');
-
-    const theme = useTheme();
-
-    const themeWithLocale = React.useMemo(
-        () => createTheme(theme, locales[locale]),
-        [locale, theme],
-    );
 
     const [group, setSelectedValue] = useState('');
 
@@ -72,30 +58,11 @@ const Glossary = () => {
                         borderRadius: '30px',
                         height: '50px'
                     }}></input>
-                    <ThemeProvider theme={themeWithLocale}>
-                        <TablePagination
-                            sx={{
-                                '.MuiTablePagination-input': {
-                                    backgroundColor: 'white',
-                                },
-                                '.MuiIconButton-root': {
-                                    color: 'white',
-                                },
-                                '.MuiTablePagination-selectLabel': {
-                                    color: 'white',
-                                },
-                                '.MuiTablePagination-displayedRows': {
-                                    color: 'white',
-                                }
-                            }}
-                            component="div"
-                            count={100} //TODO
-                            page={page}
-                            onPageChange={handleChangePage}
-                            rowsPerPage={rowsPerPage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </ThemeProvider>
+                    <Pagination page={page}
+                                rowsPerPage={rowsPerPage}
+                                handleChangePage={handleChangePage}
+                                handleChangeRowsPerPage={handleChangeRowsPerPage}
+                    ></Pagination>
                     <GlossarySearchGenerator currentGlossary={glossary}
                                              searchTerm={searchTerm}></GlossarySearchGenerator>
                 </div>

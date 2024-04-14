@@ -4,11 +4,7 @@ import { Background } from './style';
 import {getSchemas, SchemaBackend} from "../../backend/schemas";
 import {SchemesGenerator } from "../../components/SchemaGenerator/schemasGenerator";
 import {handleInputChange} from "../../components/SearchGenerator/common";
-import {TablePagination, useTheme} from "@mui/material";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
-import * as locales from "@mui/material/locale";
-
-type SupportedLocales = keyof typeof locales;
+import {Pagination} from "../../components/Pagination/pagination";
 
 const Schemas = () => {
     const [chousenChapter, setChousenChapter] = useState(-1);
@@ -23,15 +19,6 @@ const Schemas = () => {
         setChousenChapter(-1);
         setOpacityCondition(false)
     }
-
-    const [locale, setLocale] = React.useState<SupportedLocales>('ruRU');
-
-    const theme = useTheme();
-
-    const themeWithLocale = React.useMemo(
-        () => createTheme(theme, locales[locale]),
-        [locale, theme],
-    );
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -67,30 +54,11 @@ const Schemas = () => {
                         borderRadius: '30px',
                         height: '50px'
                     }}></input>
-                    <ThemeProvider theme={themeWithLocale}>
-                        <TablePagination
-                            sx={{
-                                '.MuiTablePagination-input': {
-                                    backgroundColor: 'white',
-                                },
-                                '.MuiIconButton-root': {
-                                    color: 'white',
-                                },
-                                '.MuiTablePagination-selectLabel': {
-                                    color: 'white',
-                                },
-                                '.MuiTablePagination-displayedRows': {
-                                    color: 'white',
-                                }
-                            }}
-                            component="div"
-                            count={100} //TODO
-                            page={page}
-                            onPageChange={handleChangePage}
-                            rowsPerPage={rowsPerPage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </ThemeProvider>
+                    <Pagination page={page}
+                                rowsPerPage={rowsPerPage}
+                                handleChangePage={handleChangePage}
+                                handleChangeRowsPerPage={handleChangeRowsPerPage}
+                    ></Pagination>
                     <SchemesGenerator opacityCondition={opacityCondition}
                                       chousenChapter={chousenChapter}
                                       handleMouseEnterChapter={handleMouseEnterChapter}
