@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Landing from "../pages/Landing";
-import Contents from "../pages/Contents";
+import Schemas from "../pages/Schemas";
 import Glossary from "../pages/Glossary";
 import Tests from "../pages/Tests";
 import Videos from "../pages/Videos";
@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/contents",
-    element: <Contents/>
+    element: <Schemas/>
   },
   {
     path: "/glossary",
@@ -31,5 +31,9 @@ export const router = createBrowserRouter([
   {
     path: "/videos",
     element: <Videos/>
+  },
+  {
+    path: "/schemas",
+    element: <Schemas/>
   }
 ]);

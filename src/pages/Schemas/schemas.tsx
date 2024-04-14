@@ -6,10 +6,9 @@ type chapterProp = {
     chapterId:number
     chapterName: string
     chapterContent: string
-    chapterImg: string
 }
 
-export const Chapter = (props:chapterProp) => {
+export const Schemas = (props:chapterProp) => {
     return (
         <div>
             <h2 style={{
@@ -26,7 +25,7 @@ export const Chapter = (props:chapterProp) => {
                         <path d='M0 0 L 500 0 '></path>
                     </svg>
                     <p style={{fontSize: '24px'}}>{props.chapterContent}</p>
-                    <img src={`data:image/png;base64, ${props.chapterImg}`}/>
+                    <img src={`http://localhost:8080/api/schemas/image/${props.chapterId}`}></img>
                 </div>
             </div>
         </div>

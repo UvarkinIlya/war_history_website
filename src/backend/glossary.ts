@@ -8,14 +8,8 @@ export interface GlossaryBackend {
 
 //TODO fix 2 requests
 export function getGlossary (page:number, size:number, name:string = "", group:string = ""):Array<GlossaryBackend> {
-    console.log("get glossary")
-    // const savedGlossaryStorage = localStorage.getItem("glossary")
-    // if (savedGlossaryStorage != null){
-    //     return JSON.parse(localStorage.getItem("glossary") || "{}")
-    // }
-
-    const url = new URL('http://localhost:8080/api/glossary/search');
-    const params = new URLSearchParams();
+    const url = new URL('http://localhost:8080/api/glossary/search')
+    const params = new URLSearchParams()
     params.set("page", page.toString())
     params.set("size", size.toString())
     if (group !== ""){

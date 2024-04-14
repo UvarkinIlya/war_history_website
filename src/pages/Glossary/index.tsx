@@ -2,11 +2,12 @@ import React, { useState } from "react"
 import { NavigationComponent } from "../../components/NavigationComponent"
 import { Background } from "./style"
 import glos from "./testGlossary.json"
-import { GlossarySearchGenerator } from "../../components/GlossaryGenerator"
+import { GlossarySearchGenerator } from "../../components/SearchGenerator/glossarySearchGenerator"
 import {getGlossary} from "../../backend/glossary";
 import { TablePagination, useTheme} from "@mui/material";
 import * as locales from '@mui/material/locale';
 import { createTheme, ThemeProvider} from '@mui/material/styles';
+import {handleInputChange} from "../../components/SearchGenerator/common";
 
 type SupportedLocales = keyof typeof locales;
 
@@ -46,20 +47,6 @@ const Glossary = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const glossary = getGlossary(page, rowsPerPage, searchTerm, group)
 
-    const alphabet = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я']
-    const handleInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-            let tmpGl:string[] = [];
-            alphabet.forEach((letter:string) => {
-                if(glos[letter as keyof typeof glos] !== undefined){
-                    glos[letter as keyof typeof glos].filter(x => x.match(event.currentTarget.value)).forEach((word:string)=>{
-                        tmpGl.push(word);
-                    });
-                }
-            })
-            setSearchTerm(event.currentTarget.value)
-            console.log(tmpGl);
-    }
-
     return(
         <div style={{...Background()}}>
             <div>
@@ -79,7 +66,7 @@ const Glossary = () => {
                         <option value={"REDUCTIONS"}>Сокращения</option>
                         <option value={"DESIGNATIONS"}>Обозначения</option>
                     </select>
-                    <input onChange={handleInputChange} style={{
+                    <input onChange={(event) => {setSearchTerm(handleInputChange(event))}} style={{
                         color: 'black',
                         backgroundColor: '#D2AE84',
                         borderRadius: '30px',
@@ -102,7 +89,7 @@ const Glossary = () => {
                                 }
                             }}
                             component="div"
-                            count={100} //TODO fix
+                            count={100} //TODO
                             page={page}
                             onPageChange={handleChangePage}
                             rowsPerPage={rowsPerPage}
